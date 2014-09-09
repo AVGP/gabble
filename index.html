@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Gabble</title>
+    <link rel="stylesheet" type="text/css" href="css/ionicons.css" />
+		<link rel="stylesheet" type="text/css" href="css/normalize.css" />
+		<link rel="stylesheet" type="text/css" href="css/demo.css" />
+		<link rel="stylesheet" type="text/css" href="css/tabs.css" />
+		<link rel="stylesheet" type="text/css" href="css/tabstyles.css" />
+		<script src="js/modernizr.custom.js"></script>
+	</head>
+	<body>
+		<svg class="hidden">
+			<defs>
+				<path id="tabshape" d="M80,60C34,53.5,64.417,0,0,0v60H80z"/>
+			</defs>
+		</svg>
+		<div class="container">
+
+			<section>
+				<div class="tabs tabs-style-linemove">
+					<nav>
+						<ul>
+							<li><a href="#section-linemove-1"><i class="icon ion-chatbubbles"></i> <span>Chats</span></a></li>
+							<li><a href="#section-linemove-2"><i class="icon ion-flag"></i> <span>Notifications</span></a></li>
+							<li><a href="#section-linemove-3"><i class="icon ion-person-stalker"></i> <span>Contacts</span></a></li>
+							<li><a href="#section-linemove-4"><i class="icon ion-gear-b"></i> <span>Settings</span></a></li>
+						</ul>
+					</nav>
+					<div class="content-wrap">
+						<section id="section-linemove-1"><p>Chats</p></section>
+						<section id="section-linemove-2"><p>Notifications</p></section>
+						<section id="section-linemove-3"><p>Contacts</p></section>
+						<section id="section-linemove-4"><p>Settings</p></section>
+					</div><!-- /content -->
+				</div><!-- /tabs -->
+			</section>
+
+		</div><!-- /container -->
+		<script src="js/cbpFWTabs.js"></script>
+		<script src="js/app.js"></script>
+		<script>
+			(function() {
+
+				[].slice.call( document.querySelectorAll( '.tabs' ) ).forEach( function( el ) {
+					new CBPFWTabs( el );
+				});
+
+			})();
+		</script>
+	</body>
+</html>

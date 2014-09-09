@@ -1,0 +1,20 @@
+{
+  "name": "Gabble",
+  "description": "Chat everywhere",
+  "launch_path": "/index.html",
+  "icons": {
+    "30": "/img/gabble_30.png",
+    "32": "/img/gabble_32.png",
+    "48": "/img/gabble_48.png",
+    "60": "/img/gabble_60.png",
+    "64": "/img/gabble_64.png",
+    "90": "/img/gabble_90.png",
+    "120": "/img/gabble_120.png",
+    "128": "/img/gabble_128.png"
+  },
+  "developer": {
+    "name": "Your name or organization",
+    "url": "http://your-homepage-here.org"
+  },
+  "default_locale": "en"
+}

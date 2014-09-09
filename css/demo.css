@@ -1,0 +1,76 @@
+@import url(http://fonts.googleapis.com/css?family=Raleway:400,500,700);
+
+*, *:after, *:before { -webkit-box-sizing: border-box; box-sizing: border-box; }
+.clearfix:before, .clearfix:after { content: ''; display: table; }
+.clearfix:after { clear: both; }
+
+
+a {
+	color: #2CC185;
+	text-decoration: none;
+	outline: none;
+}
+
+.hidden {
+	position: absolute;
+	width: 0;
+	height: 0;
+	overflow: hidden;
+	opacity: 0;
+}
+
+.container > section {
+	padding: 0;
+	font-size: 1.1em;
+	min-height: 100%;
+}
+
+p {
+	text-align: center;
+	padding: 1em;
+}
+
+.badge {
+	position: relative;
+	right:  0px;
+	bottom: 0px;
+
+
+}
+
+@media screen and (max-width: 620px) {
+	.tabs li span {
+		display: none;
+	}
+}
+
+@media screen and (max-width: 1280px) {
+	.codrops-header h1 {
+		padding: 0 0.5em;
+	}
+	.support {
+		padding: 0 1.5em;
+	}
+}
+
+@media screen and (max-width: 30em) {
+	.container > section {
+		padding: 3em 0;
+	}
+	.codrops-header {
+		padding: 2em 0 1em;
+	}
+	.codrops-header h1 {
+		font-size: 3.5em;
+	}
+}
+
+
+@media screen and (max-width: 25em) {
+	.codrops-icon {
+		font-size: 1.5em;
+	}
+	.codrops-icon span {
+		display: none;
+	}
+}
