@@ -4,6 +4,10 @@
 .clearfix:before, .clearfix:after { content: ''; display: table; }
 .clearfix:after { clear: both; }
 
+html, body {
+	height: 100%;
+	font-size: 100%;
+}
 
 a {
 	color: #2CC185;
@@ -21,8 +25,11 @@ a {
 
 .container > section {
 	padding: 0;
-	font-size: 1.1em;
 	min-height: 100%;
+}
+
+.tabs nav {
+		font-size: 1.1em;
 }
 
 p {
