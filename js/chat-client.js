@@ -1,33 +1,48 @@
 var Client = require('node-xmpp-client'),
     ltx    = require('ltx');
 
-var client = new Client({
-    jid: 'gabbler@jabb3r.org',
-    password: 'v31xxj'
-});
+function getChatClient() {
+  var self = {
+    onOnline:  undefined,
+    onMessage: undefined,
+    onError:   undefined
+  };
 
-client.on('online', function() {
-    console.log('online');
-    client.send('<presence/>');
-});
-
-client.on('stanza', function(stanza) {
+  // Some private methods
+  function handleMsg(stanza) {
     console.log('Incoming stanza: ', stanza.toString());
 
     if (stanza.is('message') && (stanza.attrs.type !== 'error')) {
-      stanza.attrs.to = stanza.attrs.from;
-      delete stanza.attrs.from;
-      console.log("MSG: " + stanza.getChild("body").text());
-      console.log('Sending response: ' + stanza.root().toString());
-      client.send(stanza);
+      if(self.onMessage) {
+        self.onMessage({
+          from: stanza.attrs.from,
+          body: stanza.getChild('body').text()
+        });
+      }
     }
-});
+  }
 
-client.on('error', function(e) {
-    console.error(e);
-//    process.exit(1);
-});
+  function setupClientHandlers(client) {
+    client.on('online', function() {
+      client.send('<presence/>');
+      if(self.onOnline) self.onOnline();
+    });
+    client.on('stanza', handleMsg);
+    client.on('error', function(e) {
+      console.error(e);
+      if(self.onError) self.onError(e);
+    });
+    process.on('exit', client.end);
+  }
 
-process.on('exit', function () {
-    client.end();
-});
+  // The external interface
+
+  self.connect = function(user) {
+    var client = new Client(user);
+    setupClientHandlers(client);
+  }
+
+  return self;
+}
+
+module.exports = getChatClient();
