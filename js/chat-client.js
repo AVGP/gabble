@@ -3,10 +3,13 @@ var Client = require('node-xmpp-client'),
 
 function getChatClient() {
   var self = {
-    onOnline:  undefined,
-    onMessage: undefined,
-    onError:   undefined
+    onOnline:            undefined,
+    onMessage:           undefined,
+    onError:             undefined,
+    onSubscribeRequest:  undefined
   };
+
+  var client = null;
 
   // Some private methods
   function handleMsg(stanza) {
@@ -18,6 +21,10 @@ function getChatClient() {
           from: stanza.attrs.from,
           body: stanza.getChild('body').text()
         });
+      }
+    } else if(stanza.is('presence')) {
+      if(stanza.attrs.type == 'subscribe') {
+        if(self.onSubscribeRequest) self.onSubscribeRequest(stanza.attrs.from);
       }
     }
   }
@@ -38,8 +45,12 @@ function getChatClient() {
   // The external interface
 
   self.connect = function(user) {
-    var client = new Client(user);
+    client = new Client(user);
     setupClientHandlers(client);
+  }
+
+  self.acceptPresenceSubscription = function(who) {
+    client.send('<presence to="' + who + '" type="subscribed" />')
   }
 
   return self;
