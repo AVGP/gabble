@@ -1,33 +1,24 @@
-var Client = require('node-xmpp-client'),
-    ltx    = require('ltx');
+var chat = require('./js/chat-client.js');
 
-var client = new Client({
-    jid: 'gabbler@jabb3r.org',
-    password: 'v31xxj'
-});
+// Setup chat events
+chat.onOnline = function() {
+  alert("You're now online");
+}
 
-client.on('online', function() {
-    console.log('online');
-    client.send('<presence/>');
-});
+chat.onMessage = function(msg) {
+  alert(msg.from + ": " + msg.body);
+}
 
-client.on('stanza', function(stanza) {
-    console.log('Incoming stanza: ', stanza.toString());
+chat.onError = function(error) {
+  alert("ERROR: " + error);
+  console.log("Error: ", error);
+}
 
-    if (stanza.is('message') && (stanza.attrs.type !== 'error')) {
-      stanza.attrs.to = stanza.attrs.from;
-      delete stanza.attrs.from;
-      console.log("MSG: " + stanza.getChild("body").text());
-      console.log('Sending response: ' + stanza.root().toString());
-      client.send(stanza);
-    }
-});
+chat.onSubscribeRequest = function(who) {
+  if(window.confirm(who + " wants to see your availability. Allow?")) chat.acceptPresenceSubscription(who);
+}
 
-client.on('error', function(e) {
-    console.error(e);
-//    process.exit(1);
-});
-
-process.on('exit', function () {
-    client.end();
-});
+// Setup setting controls
+document.getElementById("login").addEventListener("click", function() {
+  chat.connect({ jid: document.getElementById("jid").value, password: document.getElementById("password").value });
+}, false);
